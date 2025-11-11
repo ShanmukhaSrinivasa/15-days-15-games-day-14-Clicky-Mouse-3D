@@ -3,6 +3,7 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     private Rigidbody targetRB;
+    private AudioSource targetAudio;
 
     [Header("Target Info")]
     [SerializeField] private float minSpeed;
@@ -14,11 +15,14 @@ public class Target : MonoBehaviour
     public int pointValue;
     [SerializeField] private ParticleSystem explosionParticle;
 
-    
+    [Header("Music Elements")]
+    [SerializeField] private AudioClip normalSFX;
+    [SerializeField] private AudioClip bombSFX;
 
     void Start()
     {
         targetRB = GetComponent<Rigidbody>();
+        targetAudio = GetComponent<AudioSource>();
 
         targetRB.AddForce(RandomSpeed(), ForceMode.Impulse);
         targetRB.AddTorque(RandomTorque(), RandomTorque(), RandomTorque(), ForceMode.Impulse);
@@ -41,11 +45,14 @@ public class Target : MonoBehaviour
                 GameManager.instance.lives--;
 
                 GameManager.instance.UpdateLives();
+
+                AudioSource.PlayClipAtPoint(bombSFX, transform.position, 1.0f);
             }
 
             Destroy(gameObject);
             Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
             GameManager.instance.UpdateScore(pointValue);
+            AudioSource.PlayClipAtPoint(normalSFX, transform.position, 1.0f);
         }
         
     }
@@ -53,6 +60,7 @@ public class Target : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
+        GameManager.instance.score -= 10;
     }
 
     private Vector3 RandomSpeed()

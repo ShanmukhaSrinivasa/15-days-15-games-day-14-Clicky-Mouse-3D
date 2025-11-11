@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CanvasGroup gameOverCG;
 
     [Header("UI Elements")]
-    private int score = 0;
+    public int score = 0;
     private int highScore = 0;
     public int lives = 3;
     [SerializeField] private TextMeshProUGUI scoreCount;
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void GameStart()
+    public void GameStart(int difficulty)
     {
         ShowCG(gameCG);
         HideCG(gameStartCG);
@@ -62,6 +62,8 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
         lives = 3;
         UpdateLives();
+
+        spawnRate /= difficulty;
 
         PlayerPrefs.GetInt("highScore");
         highScoreCount.text = highScore.ToString();
