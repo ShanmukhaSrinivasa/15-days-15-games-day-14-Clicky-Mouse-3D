@@ -18,4 +18,4 @@ Encapsulated Event Logic: The Target.cs script handles its own OnMouseDown event
 Scalable Spawning: The GameManager uses a List<GameObject> targets and a coroutine (SpawnTargets) to randomly instantiate objects from the list, making it easy to add new object types.
 
 ▶️ Play the Game!
-You can play the game in your browser on its itch.io page: [Link to your new itch.io page for this game]
+You can play the game in your browser on its itch.io page: [https://shanmukha.itch.io/clicky-crates]
