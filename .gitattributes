@@ -1,9 +1,13 @@
-# Ignore Unity-specific files in language statistics
-*.mat linguist-vendored
+# Exclude Unity shader files from language stats
 *.shader linguist-vendored
-*.hlsl linguist-vendored
 *.cginc linguist-vendored
-*.m linguist-vendored
+*.compute linguist-vendored
 
-# Tell git to properly handle line endings
-* text=auto
+# Exclude standard Unity generated files
+*.mat linguist-generated
+*.prefab linguist-generated
+*.asset linguist-generated
+*.unity linguist-generated
+
+# (Optional) If you have a Plugins folder with third-party code, ignore it too
+Assets/Plugins/** linguist-vendored
